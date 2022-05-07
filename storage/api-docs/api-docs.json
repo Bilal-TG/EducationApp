@@ -1,0 +1,749 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Education App Apis",
+        "description": "Education App Apis",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/reg1": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "User Register",
+                "description": "User Register here",
+                "operationId": "Register",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "FirstName",
+                                    "LastName",
+                                    "email",
+                                    "password",
+                                    "mobile_number"
+                                ],
+                                "properties": {
+                                    "FirstName": {
+                                        "type": "string"
+                                    },
+                                    "LastName": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    },
+                                    "mobile_number": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "User Login",
+                "description": "Login User Here",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/password/forgot-password": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "User Forgot Password Link Send",
+                "description": "Forgot Password Link Send User Here",
+                "operationId": "Forgot Password",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/password/reset": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "User Forgot Password Link Send",
+                "description": "Forgot Password Link Send User Here",
+                "operationId": "Reset Password",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "token"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "token": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/updatePassword": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Update Password",
+                "description": "Update Password",
+                "operationId": "updatePassword",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "password",
+                                    "email",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Change Password Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Change Password Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/courseChapters/{id}": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get All Chapters of Courses",
+                "description": "Returns All Courses Chapters",
+                "operationId": "courseChapters",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Course Id to get Course Chapters",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/allClasses": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get All Classes",
+                "description": "Returns All Register Classes",
+                "operationId": " ",
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/allCourses": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get All Courses",
+                "description": "Returns All Register Courses",
+                "operationId": "course",
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/single_course/{id}": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get Single Course",
+                "description": "Returns All Register Courses",
+                "operationId": "course",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Course Id to get Single Course",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/SliderCourses": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get All Courses For Slider",
+                "description": "Returns All Courses For Slider",
+                "operationId": "sliderCourses",
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/PopularCourses": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get All Popular Courses",
+                "operationId": "PopularCourses",
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/searchCourses/{keyword}": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Search in All Courses against Keyword",
+                "operationId": "searchCourses",
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "path",
+                        "description": "Get Courses By keyword",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/faqs": {
+            "get": {
+                "tags": [
+                    "FAQs"
+                ],
+                "summary": "Get All FAQs",
+                "operationId": "faqs",
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/lessons/{id}": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get All Lesson of Courses",
+                "description": "Returns All Register Course Content",
+                "operationId": "lessons",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Chapter Id to get Chapter Lessons",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/changePassword": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "Change Password",
+                "description": "Change Password",
+                "operationId": "changePassword",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "oldPassword",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "oldPassword": {
+                                        "type": "password"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Change Password Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Change Password Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "User Logout",
+                "description": "Logout User",
+                "operationId": "authLogout",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "token"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/allSubjects": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get All Subjects",
+                "description": "Returns All Register Subjects",
+                "operationId": "subjects",
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/subjectCourses/{subject}": {
+            "get": {
+                "tags": [
+                    "Courses"
+                ],
+                "summary": "Get All Courses of Subject",
+                "description": "Returns All Register Subjects",
+                "operationId": "subjectCourses",
+                "parameters": [
+                    {
+                        "name": "subject",
+                        "in": "path",
+                        "description": "Get Courses By Subject",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/currentUser": {
+            "get": {
+                "tags": [
+                    "User Profile"
+                ],
+                "summary": "Get Current User",
+                "description": "Returns Current User Data",
+                "operationId": " ",
+                "responses": {
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        },
+        "/api/UserProfileSave": {
+            "post": {
+                "tags": [
+                    "User Profile"
+                ],
+                "summary": "User Profile Save",
+                "description": "User Profile Save",
+                "operationId": "User Profile Save",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "FirstName",
+                                    "LastName",
+                                    "gender",
+                                    "pp_path",
+                                    "city"
+                                ],
+                                "properties": {
+                                    "FirstName": {
+                                        "type": "string"
+                                    },
+                                    "LastName": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "InstituteName": {
+                                        "type": "string"
+                                    },
+                                    "number": {
+                                        "type": "integer"
+                                    },
+                                    "pp_path": {
+                                        "type": "file"
+                                    },
+                                    "city": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "security": [
+                    {
+                        "passport": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "apiKey",
+                "description": "Education App Api",
+                "in": "header",
+                "name": "Authorization",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://localhost/oauth/authorize",
+                        "tokenUrl": "http://localhost/oauth/token",
+                        "refreshUrl": "http://localhost/token/refresh",
+                        "scopes": []
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

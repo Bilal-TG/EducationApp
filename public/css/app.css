@@ -1,0 +1,18 @@
+.nk-block-head-content {
+	display: flex;
+	justify-content: space-between;
+}
+
+.card.popUp-card {
+	position: absolute;
+	top: 60px;
+	right: 120px;
+	width: 80%;
+	margin: 0 auto;
+	display: none;
+	transition: all 0.3s ease;
+}
+
+.close-btn{
+	cursor: pointer;
+}
