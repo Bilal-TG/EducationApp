@@ -50,7 +50,7 @@ Route::group(['prefix' => 'admin'], function () {
     //Lessons
     Route::get('lessons', [LessonController::class, 'index'])->name('allLessons')->name('allLessons');
     Route::get('addLessons', [LessonController::class, 'add'])->name('addLesson');
-    Route::post('saveLessons', [LessonController::class, 'saveLessons'])->name('saveLessons');
+    Route::post('saveLessons', [LessonController::class, 'saveLessons'])->name('saveLesson');
     //User
     Route::get('users', [UserController::class, 'index'])->name('usersList');
     //FAQs
