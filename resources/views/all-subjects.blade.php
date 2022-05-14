@@ -5,6 +5,13 @@
     <!-- nk-block -->
     <div class="nk-block nk-block-lg">
         <div class="nk-block-head">
+            @if(Session::has('message'))
+            <div class="example-alert mb-3">
+                <div class="alert {{ Session::get('flash_type') }} alert-icon">
+                    <em class="icon ni {{ Session::get('icon') }}"></em> {{ Session::get('message') }}
+                </div>
+            </div>
+            @endif
             <div class="nk-block-head-content">
                 <h4 class="nk-block-title">All Subject List</h4>
                 <a href="{{route('add-subject')}}" class="btn btn-success">Add New Subject</a>
@@ -61,10 +68,12 @@
                                         data-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <ul class="link-list-opt no-bdr">
-                                            <li><a href="#"><em class="icon ni ni-edit"></em><span>Edit
+                                            <li><a href="{{route('edit-subject', $subject->id)}}"><em
+                                                        class="icon ni ni-edit"></em><span>Edit
                                                         Subject</span></a>
                                             </li>
-                                            <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove
+                                            <li><a href="{{route('delete-subject', $subject->id)}}"><em
+                                                        class="icon ni ni-trash"></em><span>Remove
                                                         Subject</span></a></li>
                                         </ul>
                                     </div>

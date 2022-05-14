@@ -1,5 +1,5 @@
 @extends('layout.main')
-@section('title','Learitsmarter | Dashboard | Add New Course')
+@section('title','Learitsmarter | Dashboard | Update Course')
 @section('style')
 <style>
 #site-name::placeholder {
@@ -15,11 +15,12 @@
         <div class="card">
             <div class="card-inner">
                 <div class="card-head">
-                    <h5 class="card-title">Add New Course</h5>
+                    <h5 class="card-title">Update Course</h5>
                 </div>
-                <form action="{{route('save-course')}}" class="gy-3" method="post" enctype="multipart/form-data">
+                <form action="" class="gy-3" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row g-3 align-center">
+                        <input type="text" name="id" value="{{$course->id}}" hidden="hidden">
                         <div class="col-lg-5">
                             <div class="form-group">
                                 <label class="form-label" for="site-name">Select Class</label>
@@ -31,30 +32,45 @@
                                 <label class="form-label">Select Class</label>
                                 <div class="form-control-wrap">
                                     <select class="form-select" name="class_id" data-placeholder="Select Class">
-                                        @foreach ($allClasses as $class)
-                                        <option name="class_id" value="{{$class->id}}">{{$class->class_name}}</option>
-                                        @endforeach
+                                        <option name="class_id" value="{{$course->class_id}}">
+                                            @foreach ($allClasses as $class)
+                                            @if($course->class_id == $class->id)
+                                        <option selected name="class_id" value="{{$class->id}}">{{$class->class_name}}
+                                            (Selected)
+                                        </option>
+                                        @endif
+                                        <option name="class_id" value="{{$class->id}}">{{$class->class_name}}
+
+                                            @endforeach
+                                        </option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row g-3 align-center">
+                        <input type="text" name="id" value="{{$course->id}}" hidden="hidden">
                         <div class="col-lg-5">
                             <div class="form-group">
                                 <label class="form-label" for="site-name">Select Subject</label>
-                                <span class="form-note">Select the Subject to which you want to add the Course.</span>
+                                <span class="form-note">Select the subject to which you want to add the Subject.</span>
                             </div>
                         </div>
                         <div class="col-lg-7">
                             <div class="form-group">
                                 <label class="form-label">Select Subject</label>
                                 <div class="form-control-wrap">
-                                    <select class="form-select" name="subject_id" data-placeholder="Select Class">
-                                        @foreach ($allSubject as $subject)
-                                        <option name="subject_id" value="{{$subject->id}}">{{$subject->title}}
+                                    <select class="form-select" name="class_id" data-placeholder="Select Class">
+                                        <option name="class_id" value="{{$course->class_id}}">
+                                            @foreach ($allSubject as $subject)
+                                            @if($course->subject_id == $subject->id)
+                                        <option selected name="class_id" value="{{$class->id}}">{{$subject->title}}
+                                            (Selected)
                                         </option>
-                                        @endforeach
+                                        @endif
+                                        <option name="class_id" value="{{$class->id}}">{{$subject->title}}
+                                            @endforeach
+                                        </option>
                                     </select>
                                 </div>
                             </div>
@@ -70,8 +86,8 @@
                         <div class="col-lg-7">
                             <div class="form-group">
                                 <div class="form-control-wrap">
-                                    <input type="text" name="course_title" class="form-control" id="site-name"
-                                        placeholder="Course Title">
+                                    <input type="text" value="{{$course->title}}" name="course_title"
+                                        class="form-control" id="site-name" placeholder="Course Title">
                                 </div>
                             </div>
                         </div>
@@ -85,9 +101,10 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="card card-bordered">
-                                <!-- Create the editor container -->
-                                <textarea name="course_desc" class="quill-minimal">
-                                </textarea>
+                                <!-- Ceate the editor container -->
+                                <div name="course_desc" class="quill-minimal">
+                                    {{$course->description}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -268,7 +285,8 @@
                     <div class="row g-3">
                         <div class="col-lg-7 offset-lg-5">
                             <div class="form-group mt-2">
-                                <button type="submit" class="btn btn-lg btn-primary">Update</button>
+                                <button type="submit" class="btn btn-lg btn-primary m-2">Update</button>
+                                <button type="submit" class="btn btn-lg btn-danger m-2">Delete</button>
                             </div>
                         </div>
                     </div>

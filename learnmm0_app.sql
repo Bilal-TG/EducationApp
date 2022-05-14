@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: May 05, 2022 at 06:50 AM
--- Server version: 5.7.23-23
--- PHP Version: 7.3.32
+-- Host: localhost
+-- Generation Time: May 13, 2022 at 08:22 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -66,8 +65,8 @@ CREATE TABLE `classes` (
 --
 
 INSERT INTO `classes` (`id`, `class_name`, `created_at`, `updated_at`) VALUES
-(1, 'A Level', NULL, NULL),
-(2, 'O Level', NULL, NULL),
+(1, 'A Level', NULL, '2022-05-06 06:15:22'),
+(2, 'O Level', NULL, '2022-05-06 06:17:45'),
 (3, '10th', NULL, NULL),
 (4, '9th', NULL, NULL);
 
@@ -80,7 +79,8 @@ INSERT INTO `classes` (`id`, `class_name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `courses` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci,
+  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `class_id` int(11) NOT NULL,
   `subject_id` bigint(20) UNSIGNED NOT NULL,
   `add_time` date NOT NULL,
   `course_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -89,11 +89,11 @@ CREATE TABLE `courses` (
   `price` decimal(15,2) DEFAULT NULL,
   `sale_price` decimal(16,2) DEFAULT NULL,
   `total_time` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(4) DEFAULT '0',
-  `view_count` int(11) DEFAULT '0',
-  `featured` int(11) DEFAULT '0',
-  `popular` tinyint(1) DEFAULT '0',
-  `total_lessons` tinyint(4) DEFAULT '0',
+  `status` tinyint(4) DEFAULT 0,
+  `view_count` int(11) DEFAULT 0,
+  `featured` int(11) DEFAULT 0,
+  `popular` tinyint(1) DEFAULT 0,
+  `total_lessons` tinyint(4) DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -102,10 +102,11 @@ CREATE TABLE `courses` (
 -- Dumping data for table `courses`
 --
 
-INSERT INTO `courses` (`id`, `title`, `description`, `subject_id`, `add_time`, `course_image`, `intro_video`, `keywords`, `price`, `sale_price`, `total_time`, `status`, `view_count`, `featured`, `popular`, `total_lessons`, `created_at`, `updated_at`) VALUES
-(1, 'Fundamentals of Chemistry', 'The Fundamentals of Chemistry is an introduction to the Periodic Table, stoichiometry, chemical states, chemical equilibria, acid & base, oxidation & reduction reactions, chemical kinetics, inorganic nomenclature and chemical bonding.', 1, '2022-03-24', 'https://bookboon.com/thumbnail/380/c4bc79b4-c124-4460-bbd7-a03100c583a7/b5dc4812-36df-4d76-9233-a5cd00e34b0b/fundamentals-of-chemistry.jpg', NULL, 'chemistry, Fundamentals, introduction, Periodic Table, stoichiometry, chemical states, chemical equilibria, acid & base, oxidation, reduction reactions, chemical kinetics', 200.00, NULL, NULL, 0, 0, 1, 0, 2, NULL, '2022-04-01 18:55:48'),
-(2, 'Fundamentals of Physics', 'Physics is a natural science that involves the study of matter and its motion through space and time, along with related concepts such as energy and force. More broadly, it is the study of nature in an attempt to understand how the universe behaves.', 2, '2022-03-24', 'https://media.wiley.com/product_data/coverImage300/74/11197734/1119773474.jpg', NULL, 'Physics, natural science, study of matter, motion, space and time, energy, force', 500.00, NULL, NULL, 0, 0, 1, 1, 2, NULL, '2022-04-01 18:55:48'),
-(3, 'Fundamentals of Math', 'Physics is a natural science that involves the study of matter and its motion through space and time, along with related concepts such as energy and force. More broadly, it is the study of nature in an attempt to understand how the universe behaves.', 3, '2022-03-24', 'https://media.wiley.com/product_data/coverImage300/74/11197734/1119773474.jpg', NULL, 'Physics, natural science, study of matter, motion, space and time, energy, force', 500.00, NULL, NULL, 0, 0, 1, 1, 2, NULL, '2022-04-01 18:55:48');
+INSERT INTO `courses` (`id`, `title`, `description`, `class_id`, `subject_id`, `add_time`, `course_image`, `intro_video`, `keywords`, `price`, `sale_price`, `total_time`, `status`, `view_count`, `featured`, `popular`, `total_lessons`, `created_at`, `updated_at`) VALUES
+(1, 'Fundamentals of Chemistry', 'The Fundamentals of Chemistry is an introduction to the Periodic Table, stoichiometry, chemical states, chemical equilibria, acid & base, oxidation & reduction reactions, chemical kinetics, inorganic nomenclature and chemical bonding.', 0, 1, '2022-03-24', 'https://bookboon.com/thumbnail/380/c4bc79b4-c124-4460-bbd7-a03100c583a7/b5dc4812-36df-4d76-9233-a5cd00e34b0b/fundamentals-of-chemistry.jpg', NULL, 'chemistry, Fundamentals, introduction, Periodic Table, stoichiometry, chemical states, chemical equilibria, acid & base, oxidation, reduction reactions, chemical kinetics', '200.00', NULL, NULL, 0, 0, 1, 0, 2, NULL, '2022-04-01 18:55:48'),
+(2, 'Fundamentals of Physics', 'Physics is a natural science that involves the study of matter and its motion through space and time, along with related concepts such as energy and force. More broadly, it is the study of nature in an attempt to understand how the universe behaves.', 0, 2, '2022-03-24', 'https://media.wiley.com/product_data/coverImage300/74/11197734/1119773474.jpg', NULL, 'Physics, natural science, study of matter, motion, space and time, energy, force', '500.00', NULL, NULL, 0, 0, 1, 1, 2, NULL, '2022-04-01 18:55:48'),
+(3, 'Fundamentals of Math', 'Physics is a natural science that involves the study of matter and its motion through space and time, along with related concepts such as energy and force. More broadly, it is the study of nature in an attempt to understand how the universe behaves.', 0, 3, '2022-03-24', 'https://media.wiley.com/product_data/coverImage300/74/11197734/1119773474.jpg', NULL, 'Physics, natural science, study of matter, motion, space and time, energy, force', '500.00', NULL, NULL, 0, 0, 1, 1, 2, NULL, '2022-04-01 18:55:48'),
+(4, 'New Chemistry Course', 'New Chemistry Course', 1, 1, '2022-05-12', 'http://127.0.0.1:8000/storage/course_cover/New_Chemistry_Course.png', 'http://127.0.0.1:8000/storage/http://127.0.0.1:8000/storage/course_cover/New_Chemistry_Course.png', 'new, course, description, chemistry, latest, update', '200.00', '100.00', NULL, 1, 0, 0, NULL, 0, '2022-05-12 07:09:03', '2022-05-12 07:09:03');
 
 -- --------------------------------------------------------
 
@@ -120,7 +121,7 @@ CREATE TABLE `failed_jobs` (
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -160,8 +161,8 @@ CREATE TABLE `lessons` (
   `chapter_id` bigint(20) UNSIGNED NOT NULL,
   `course_id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci,
-  `long_text` longtext COLLATE utf8mb4_unicode_ci,
+  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `long_text` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `video_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `thumbnail_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `video_start_time` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '0',
@@ -225,7 +226,7 @@ CREATE TABLE `oauth_access_tokens` (
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `scopes` text COLLATE utf8mb4_unicode_ci,
+  `scopes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `revoked` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -254,7 +255,7 @@ CREATE TABLE `oauth_auth_codes` (
   `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `client_id` bigint(20) UNSIGNED NOT NULL,
-  `scopes` text COLLATE utf8mb4_unicode_ci,
+  `scopes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `revoked` tinyint(1) NOT NULL,
   `expires_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -354,7 +355,7 @@ CREATE TABLE `personal_access_tokens` (
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -383,7 +384,7 @@ INSERT INTO `subjects` (`id`, `class_id`, `title`, `icon`, `created_at`, `update
 (1, 1, 'Chemistry', 'https://cdn-icons-png.flaticon.com/512/3081/3081530.png', '2022-03-22 19:43:34', '2022-03-22 19:43:34'),
 (2, 1, 'Math', 'https://cdn-icons-png.flaticon.com/512/2249/2249488.png', NULL, NULL),
 (3, 1, 'Physics', 'https://cdn-icons-png.flaticon.com/512/4069/4069174.png', NULL, NULL),
-(4, 1, 'Computer', 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png', NULL, NULL);
+(4, 1, 'Computer', 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png', NULL, '2022-05-12 02:34:09');
 
 -- --------------------------------------------------------
 
@@ -570,13 +571,13 @@ ALTER TABLE `chapters`
 -- AUTO_INCREMENT for table `classes`
 --
 ALTER TABLE `classes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -624,7 +625,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`

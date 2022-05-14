@@ -32,20 +32,33 @@ Route::get('admin', function () {
 });
 
 Route::group(['prefix' => 'admin'], function () {
+    //Dashboard
     Route::view('dashboard', 'dashboard')->name('dashboard');
+    //All Courses
     Route::get('courses', [allCourses::class, 'index'])->name('allCourses');
     Route::get('add-course', [allCourses::class, 'add'])->name('add-Courses');
+    Route::post('save-course', [allCourses::class, 'saveCourse'])->name('save-course');
+    Route::get('edit-course/{id}', [allCourses::class, 'editCourse'])->name('edit-course');
+    //Classes
     Route::get('classes', [allClasses::class, 'index'])->name('allClasses');
     Route::post('saveClass', [allClasses::class, 'saveClass'])->name('saveClass');
     Route::post('updateClass', [allClasses::class, 'updateClass'])->name('updateClass');
     Route::get('deleteClass/{id}', [allClasses::class, 'deleteClass'])->name('deleteClass');
     Route::get('editClass/{id}', [allClasses::class, 'editClass'])->name('editClass');
-    Route::get('subjects', [SubjectController::class, 'index'])->name('allSubjects');
-    Route::get('chapters', [ChapterController::class, 'index'])->name('allChapters');
+    //Lessons
     Route::get('lessons', [LessonController::class, 'index'])->name('allLessons');
+    //User
     Route::get('users', [UserController::class, 'index'])->name('usersList');
+    //FAQs
     Route::get('faqs', [FaqController::class, 'index'])->name('allFaq');
+    //Subjects
+    Route::get('subjects', [SubjectController::class, 'index'])->name('allSubjects');
     Route::get('add-subject', [SubjectController::class, 'add'])->name('add-subject');
     Route::post('save-subject', [SubjectController::class, 'save'])->name('save-subject');
+    Route::post('update-subject', [SubjectController::class, 'updateSubject'])->name('update-subject');
+    Route::get('delete-subject/{id}', [SubjectController::class, 'deleteSubject'])->name('delete-subject');
+    Route::get('edit-subject/{id}', [SubjectController::class, 'editSubject'])->name('edit-subject');
+    //Chapters
     Route::get('chapters', [ChapterController::class, 'index'])->name('all-chapters');
+    Route::get('chapters', [ChapterController::class, 'index'])->name('allChapters');
 });

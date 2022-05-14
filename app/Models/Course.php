@@ -11,6 +11,11 @@ class Course extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
     
+    protected $fillable = [
+        'title', 'description', 'add_time', 'keywords', 'price', 'sale_price', 'status', 'featured', 'popular', 'class_id', 'subject_id', 'course_image', 'intro_video'
+         
+    ];
+
     public function subject()
     {
         return $this->belongsTo(Subject::class);
