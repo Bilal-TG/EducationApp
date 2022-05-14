@@ -48,8 +48,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('deleteClass/{id}', [allClasses::class, 'deleteClass'])->name('deleteClass');
     Route::get('editClass/{id}', [allClasses::class, 'editClass'])->name('editClass');
     //Lessons
-    Route::get('lessons', [LessonController::class, 'index'])->name('allLessons');
-    Route::get('addLessons', [LessonController::class, 'add'])->name('addLessons');
+    Route::get('lessons', [LessonController::class, 'index'])->name('allLessons')->name('allLessons');
+    Route::get('addLessons', [LessonController::class, 'add'])->name('addLesson');
     Route::post('saveLessons', [LessonController::class, 'saveLessons'])->name('saveLessons');
     //User
     Route::get('users', [UserController::class, 'index'])->name('usersList');
@@ -64,5 +64,4 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('edit-subject/{id}', [SubjectController::class, 'editSubject'])->name('edit-subject');
     //Chapters
     Route::get('chapters', [ChapterController::class, 'index'])->name('all-chapters');
-    Route::get('chapters', [ChapterController::class, 'index'])->name('allChapters');
 });
