@@ -6,6 +6,18 @@
     font-weight: 400;
     color: #455364;
 }
+
+.icon-after-image {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-after-image .close {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+}
 </style>
 @endsection
 @section('content')
@@ -17,7 +29,7 @@
                 <div class="card-head">
                     <h5 class="card-title">Update Course</h5>
                 </div>
-                <form action="" class="gy-3" method="post" enctype="multipart/form-data">
+                <form action="{{ route('update-course')}}" class="gy-3" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row g-3 align-center">
                         <input type="text" name="id" value="{{$course->id}}" hidden="hidden">
@@ -35,14 +47,14 @@
                                         <option name="class_id" value="{{$course->class_id}}">
                                             @foreach ($allClasses as $class)
                                             @if($course->class_id == $class->id)
-                                        <option selected name="class_id" value="{{$class->id}}">{{$class->class_name}}
-                                            (Selected)
-                                        </option>
-                                        @endif
-                                        <option name="class_id" value="{{$class->id}}">{{$class->class_name}}
-
+                                                <option selected name="class_id" value="{{$class->id}}">{{$class->class_name}}
+                                                (Selected)
+                                                </option>
+                                            @endif
+                                            <option name="class_id" value="{{$class->id}}">{{$class->class_name}}
                                             @endforeach
                                         </option>
+                                        
                                     </select>
                                 </div>
                             </div>
@@ -60,15 +72,15 @@
                             <div class="form-group">
                                 <label class="form-label">Select Subject</label>
                                 <div class="form-control-wrap">
-                                    <select class="form-select" name="class_id" data-placeholder="Select Class">
-                                        <option name="class_id" value="{{$course->class_id}}">
+                                    <select class="form-select" name="subject_id" data-placeholder="Select Class">
+                                        <option name="subject_id" value="{{$course->class_id}}">
                                             @foreach ($allSubject as $subject)
                                             @if($course->subject_id == $subject->id)
-                                        <option selected name="class_id" value="{{$class->id}}">{{$subject->title}}
+                                        <option selected name="subject_id" value="{{$subject->id}}">{{$subject->title}}
                                             (Selected)
                                         </option>
                                         @endif
-                                        <option name="class_id" value="{{$class->id}}">{{$subject->title}}
+                                        <option name="subject_id" value="{{$subject->id}}">{{$subject->title}}
                                             @endforeach
                                         </option>
                                     </select>
@@ -101,10 +113,11 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="card card-bordered">
-                                <!-- Ceate the editor container -->
-                                <div name="course_desc" class="quill-minimal">
+                                <textarea name="course_desc" value="{{$course->description}}" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$course->description}}</textarea>
+                                {{-- <input type="text" value="{{$course->description}}" name="course_desc"> --}}
+                                {{-- <div name="course_desc" class="quill-minimal">
                                     {{$course->description}}
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -120,7 +133,7 @@
                                 <div class="form-icon form-icon-right">
                                     <em class="icon ni ni-calendar-alt"></em>
                                 </div>
-                                <input type="text" name="course_add_time" class="form-control date-picker">
+                                <input type="text" name="course_add_time" value="{{$course->add_time}}" class="form-control date-picker" >
                             </div>
                         </div>
                     </div>
@@ -135,6 +148,12 @@
                             <div class="form-group">
                                 <label class="form-label">Upload Course Image</label>
                                 <div class="form-control-wrap">
+                                    <div class="icon-after-image">
+                                        <img src="{{$course->course_image}}" alt="" width="100" class="m-2">
+                                        <div class="close">
+                                            <em class="icon ni ni-cross-circle-fill"></em>
+                                        </div>
+                                    </div>
                                     <div class="custom-file">
                                         <input type="file" name="course_cover" class="custom-file-input"
                                             id="customFile">
@@ -147,7 +166,7 @@
                     <div class="row g-3 align-center">
                         <div class="col-lg-5">
                             <div class="form-group">
-                                <label class="form-label">Add Course Intro Vide</label>
+                                <label class="form-label">Add Course Intro Video</label>
                                 <span class="form-note">Add intro video of the course.</span>
                             </div>
                         </div>
@@ -155,6 +174,14 @@
                             <div class="form-group">
                                 <label class="form-label">Upload Course Intro Video</label>
                                 <div class="form-control-wrap">
+                                    <div class="icon-after-image">
+                                        <video width="100" height="100" controls>
+                                            <source src="{{$course->course_image}}" type="video/mp4">
+                                          </video>
+                                        <div class="close">
+                                            <em class="icon ni ni-cross-circle-fill"></em>
+                                        </div>
+                                    </div>
                                     <div class="custom-file">
                                         <input type="file" name="intro_video" class="custom-file-input" id="customFile">
                                         <label class="custom-file-label" for="customFile">Choose file</label>
@@ -174,7 +201,7 @@
                             <div class="form-group">
                                 <div class="form-control-wrap">
                                     <input type="text" name="keywords" class="form-control" id="site-name"
-                                        placeholder="Add Course Keywords">
+                                        placeholder="Add Course Keywords" value="{{$course->keywords}}">
                                 </div>
                             </div>
                         </div>
@@ -190,7 +217,7 @@
                             <div class="form-control-wrap">
                                 <div class="input-group">
                                     <input type="text" name="price" class="form-control"
-                                        aria-label="Amount (to the nearest dollar)">
+                                        aria-label="Amount (to the nearest dollar)" value="{{$course->price}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">.00</span>
                                         <span class="input-group-text">pkr</span>
@@ -210,7 +237,7 @@
                             <div class="form-control-wrap">
                                 <div class="input-group">
                                     <input type="text" name="d_price" class="form-control"
-                                        aria-label="Amount (to the nearest dollar)">
+                                        aria-label="Amount (to the nearest dollar)" value="{{$course->sale_price}}">
                                     <div class="input-group-append">
                                         <span class="input-group-text">.00</span>
                                         <span class="input-group-text">pkr</span>
@@ -285,8 +312,8 @@
                     <div class="row g-3">
                         <div class="col-lg-7 offset-lg-5">
                             <div class="form-group mt-2">
-                                <button type="submit" class="btn btn-lg btn-primary m-2">Update</button>
-                                <button type="submit" class="btn btn-lg btn-danger m-2">Delete</button>
+                                <button type="submit" href="{{route('update-course')}}" class="btn btn-lg btn-primary m-2">Update</button>
+                                <a class="btn btn-lg btn-danger m-2" href="{{ route('delete-course', $course->id) }}">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -301,5 +328,13 @@
 <script src="{{asset('js/libs/editors/quill.js')}}"></script>
 <link rel="stylesheet" href="{{asset('css/editors/quill.css')}}">
 <script src="{{asset('js/editors.js')}}">
+</script>
+
+<script type="text/javascript">
+let close = document.querySelector('.close');
+let closeMain = document.querySelector('.icon-after-image');
+close.addEventListener('click', () => {
+    closeMain.style.display = "none";
+})
 </script>
 @endsection

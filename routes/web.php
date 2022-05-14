@@ -39,6 +39,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('add-course', [allCourses::class, 'add'])->name('add-Courses');
     Route::post('save-course', [allCourses::class, 'saveCourse'])->name('save-course');
     Route::get('edit-course/{id}', [allCourses::class, 'editCourse'])->name('edit-course');
+    Route::post('update-course', [allCourses::class, 'updateCourse'])->name('update-course');
+    Route::get('delete-course/{id}', [allCourses::class, 'deleteCourse'])->name('delete-course');
     //Classes
     Route::get('classes', [allClasses::class, 'index'])->name('allClasses');
     Route::post('saveClass', [allClasses::class, 'saveClass'])->name('saveClass');
@@ -47,6 +49,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('editClass/{id}', [allClasses::class, 'editClass'])->name('editClass');
     //Lessons
     Route::get('lessons', [LessonController::class, 'index'])->name('allLessons');
+    Route::get('addLessons', [LessonController::class, 'add'])->name('addLessons');
+    Route::post('saveLessons', [LessonController::class, 'saveLessons'])->name('saveLessons');
     //User
     Route::get('users', [UserController::class, 'index'])->name('usersList');
     //FAQs
