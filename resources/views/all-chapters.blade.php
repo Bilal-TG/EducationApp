@@ -56,7 +56,7 @@ a:hover:after {
                                         </div>
                                         @endforeach
                                         <div class="col-lg-4 mt-2 d-flex align-center">
-                                            <a href="{{route('')}}" class="btn btn-primary"
+                                            <a href="" class="btn btn-primary"
                                                 title="Add New Chapter to this Course!"><em
                                                     class="icon ni ni-plus-circle-fill"></em>
                                             </a>
