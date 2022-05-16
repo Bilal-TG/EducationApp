@@ -154,7 +154,11 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">All
+                                            <a href="{{ route('allFaq') }}" class="nk-menu-link"><span class="nk-menu-text">All
+                                                    FAQs</span></a>
+                                        </li>
+                                        <li class="nk-menu-item">
+                                            <a href="{{ route('add-faq') }}" class="nk-menu-link"><span class="nk-menu-text">Add
                                                     FAQs</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->

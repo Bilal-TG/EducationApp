@@ -55,6 +55,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('users', [UserController::class, 'index'])->name('usersList');
     //FAQs
     Route::get('faqs', [FaqController::class, 'index'])->name('allFaq');
+    Route::get('add-faq', [FaqController::class, 'add'])->name('add-faq');
+    Route::post('save-faq', [FaqController::class, 'saveFaq'])->name('save-faq');
+    Route::get('edit-faq/{id}', [FaqController::class, 'editFaq'])->name('edit-faq');
+    Route::post('update-faq/{id}', [FaqController::class, 'updateFaq'])->name('update-faq');
+    Route::get('delete-faq/{id}', [FaqController::class, 'deleteFaq'])->name('delete-faq');
     //Subjects
     Route::get('subjects', [SubjectController::class, 'index'])->name('allSubjects');
     Route::get('add-subject', [SubjectController::class, 'add'])->name('add-subject');
