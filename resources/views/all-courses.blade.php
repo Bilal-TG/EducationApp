@@ -17,6 +17,7 @@
 @endsection
 @section('content')
 <div class="nk-content">
+
     <!-- nk-block -->
     <div class="nk-block nk-block-lg">
         <div class="nk-block-head">

@@ -6,10 +6,54 @@
     font-weight: 400;
     color: #455364;
 }
+
+#loading-bar-spinner.spinner {
+    left: 50%;
+    margin-left: -20px;
+    top: 50%;
+    margin-top: -20px;
+    position: absolute;
+    z-index: 100 !important;
+    animation: loading-bar-spinner 500ms linear infinite;
+}
+
+#loading-bar-spinner.spinner .spinner-icon {
+    width: 100px;
+    height: 100px;
+    border: solid 24px transparent;
+    border-top-color: #00C8B1 !important;
+    border-left-color: #00C8B1 !important;
+    border-radius: 50%;
+}
+
+@keyframes loading-bar-spinner {
+    0% {
+        transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+.center-sticky {
+    position: fixed;
+    z-index: 2;
+    right: 46%;
+    top: 50%;
+}
 </style>
 @endsection
 @section('content')
 <div class="nk-content">
+    <div class="center-sticky">
+        <div id="loading-bar-spinner" class="spinner">
+            <div class="spinner-icon"></div>
+        </div>
+    </div>
+
     <!-- nk-block -->
     <div class="nk-block nk-block-lg">
         <div class="card">
