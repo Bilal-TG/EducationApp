@@ -113,11 +113,10 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="card card-bordered">
-                                <textarea name="course_desc" value="{{$course->description}}" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$course->description}}</textarea>
-                                {{-- <input type="text" value="{{$course->description}}" name="course_desc"> --}}
-                                {{-- <div name="course_desc" class="quill-minimal">
-                                    {{$course->description}}
-                                </div> --}}
+                                {{-- <textarea name="course_desc" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$course->description}}</textarea> --}}
+                                <div class="quill-minimal">
+                                    <input type="text" value="{{$course->description}}" name="course_desc">
+                                </div>
                             </div>
                         </div>
                     </div>

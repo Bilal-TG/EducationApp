@@ -26,26 +26,23 @@ class LessonController extends Controller
     }
     public function save(Request $request)
     {
-        //return $request;
-        //return $lessonsCount = Lesson::whereCourseId($request->course_id)->count();
-        return Lesson::whereCourseId($request->course_id)->count();
-        $validator = Validator::make($request->all(), [
-            'chapter_id' => 'required|integer',
-            'course_id' => 'required|integer',
+        
+         $validator = Validator::make($request->all(), [
+             'chapter_id' => 'required|integer',
+             'course_id' => 'required|integer',
             'leasson_title' => 'required|string|max:50',
-            'lesson_desc' => 'required|string',
-            'lesson_expl' => 'required|string',
-            'lesson_cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'lesson_position' => 'required|integer',
-            //'intro_video'  => 'required | mimes:mp4,mov,ogg | max:20000'
-        ]);
+             'lesson_desc' => 'required|string',
+             'lesson_expl' => 'required|string',
+             'lesson_cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+             'intro_video'  => 'required | mimes:mp4,mov,ogg | max:20000'
+         ]);
 
-        if ($validator->fails()) {
-            Session()->flash('error', 'All fields are required!');
-            session()->flash('flash_type', 'alert-danger');
-            session()->flash('icon', 'ni-alert-fill-c');
-            return redirect()->back()->withInput();
-        }
+         if ($validator->fails()) {
+         Session()->flash('error', 'All fields are required!');
+             session()->flash('flash_type', 'alert-danger');
+             session()->flash('icon', 'ni-alert-fill-c');
+             return redirect()->back()->withInput();
+         }
         $file = $request->file('lesson_cover');
         $video_file = $request->file('intro_video');
         if ($file && $video_file) {
@@ -79,6 +76,7 @@ class LessonController extends Controller
             
             $save = Course::create($data);
             if ($save) {
+                $lessonsCount = Lesson::whereCourseId($request->course_id)->count();
                 $courseUpdate = Course::find($request->course_id);
                 $courseUpdate->total_lessons = $lessonsCount;
                 $courseUpdate->save();
@@ -91,7 +89,6 @@ class LessonController extends Controller
             Session()->flash('error', 'Image is not uploaded');
             session()->flash('flash_type', 'alert-warning');
             session()->flash('icon', 'ni-alert-fill-c');
-            return $request;
             return redirect()->back();
         }
     }

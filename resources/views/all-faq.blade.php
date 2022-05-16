@@ -22,45 +22,46 @@ a:hover:after {
     <!-- nk-block -->
     <div class="nk-block nk-block-lg">
         <div class="nk-block-head">
+            @if(Session::has('success'))
+            <div class="example-alert mb-3">
+                <div class="alert {{ Session::get('flash_type') }} alert-icon">
+                    <em class="icon ni {{ Session::get('icon') }}"></em> {{ Session::get('success') }}
+                </div>
+            </div>
+            @endif
             <div class="nk-block-head-content">
-                <h4 class="nk-block-title">All Chapters List</h4><a href="#" class="btn btn-success add-class-btn">Add
-                    New Chapter</a>
+                <h4 class="nk-block-title">All FAQs List</h4><a href="{{ route('add-faq') }}" class="btn btn-success add-class-btn">Add
+                    New FAQ</a>  
             </div>
         </div>
         <div class="nk-block nk-block-lg">
-            @foreach ($courses as $course)
+            @foreach ($allFaqs as $faq)
             <div class="card card-preview mb-2">
                 <div class="card-inner">
                     <div id="accordion" class="accordion">
                         <div class="accordion-item"><a href="#" class="accordion-head" data-toggle="collapse"
-                                data-target="#accordion-item-{{$course->id}}">
-                                <h6 class="title"> {{$course->title}}
+                                data-target="#accordion-item-{{$faq->id}}">
+                                <h6 class="title"> {{$faq->question}}
 
                                 </h6><span class="accordion-icon"></span>
                             </a>
-                            <div class="accordion-body collapse show" id="accordion-item-{{$course->id}}"
+                            <div class="accordion-body collapse show" id="accordion-item-{{$faq->id}}"
                                 data-parent="#accordion">
                                 <div class="card-inner">
-                                    <div class="row">@foreach ($course->chapters as $chapter) <div
-                                            class="col-lg-4 mt-2">
+                                    <div class="row">
+                                        <div class="col-12 mt-1">
                                             <div class="card">
                                                 <div class="card-inner">
-                                                    <h5 class="card-title"> {{$chapter->chapter_name}}
+                                                   
+                                                    <p class="card-text"> {{$faq->answer}}
 
-                                                    </h5>
-                                                    <p class="card-text"> {{$chapter->chapter_description}}
-
-                                                    </p><a href="#" class="btn btn-primary">View / Edit</a>
+                                                    </p><a href="{{route('edit-faq', $faq->id)}}" class="btn btn-primary">Edit</a>
+                                                    <a href="{{route('delete-faq', $faq->id)}}" class="btn btn-danger">Delete</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        @endforeach
-                                        <div class="col-lg-4 mt-2 d-flex align-center">
-                                            <a href="" class="btn btn-primary"
-                                                title="Add New Chapter to this Course!"><em
-                                                    class="icon ni ni-plus-circle-fill"></em>
-                                            </a>
-                                        </div>
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +73,7 @@ a:hover:after {
             @endforeach
         </div>
         <!-- .card-preview -->
-    </div>
+    
 </div>
 <!-- nk-block -->
 </div>@endsection

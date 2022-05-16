@@ -111,7 +111,6 @@ class allCourses extends Controller
 
     public function updateCourse(Request $request){
         dd($request);
-
         // $validator = Validator::make($request->all(), [
         //     'class_id' => 'required|integer',
         //     'subject_id' => 'required|integer',
@@ -138,6 +137,7 @@ class allCourses extends Controller
         $course = Course::whereId($request->id)->first();
         $course->title = $request->course_title;
         $course->description = $request->course_desc;
+        
         $course->class_id = $request->class_id;
         $course->subject_id = $request->class_id;
         $course->add_time = $request->course_add_time;
