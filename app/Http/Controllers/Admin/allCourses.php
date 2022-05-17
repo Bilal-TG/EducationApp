@@ -33,19 +33,17 @@ class allCourses extends Controller
             'keywords' => 'required|string',
             'price' => 'required|integer',
             'd_price' => 'required|integer',
-            'status' => 'required|integer',
             'course_cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
-            Session()->flash('error', 'All fields are required!');
+            Session()->flash('message', 'All fields are required!');
             session()->flash('flash_type', 'alert-danger');
             session()->flash('icon', 'ni-alert-fill-c');
             return redirect()->back()->withInput();
         }
-        $path = null;
-        $featured = null;
-        $popular = null;
+        $featured = $request->featured_course == 'on' ? 1 : 0;
+        $popular =  $request->popular_course == 'on' ? 1 : 0 ;
         $file = $request->file('course_cover');
         $video_file = $request->file('intro_video');
         if ($file && $video_file) {
@@ -64,21 +62,14 @@ class allCourses extends Controller
 
                 $video_path = $video_file->storeAs('public/course_intros', str_replace(' ', '_', $video_filename));
                 if ($video_path) {
-                    $video_path = asset(Storage::url($path));
+                    $video_path = asset(Storage::url($video_path));
                 }
-            }
-            if($request->featured_course){
-                $featured = 1;
-            }
-            if($request->popular){
-                $popular = 1;
             }
             $data['title'] = $request->course_title;
             $data['description'] = $request->course_desc;
             $data['subject_id'] = $request->subject_id;
             $data['class_id'] = $request->class_id;
-            $data['add_time'] = \Carbon\Carbon::
-            createFromFormat('m/d/Y', $request->course_add_time)->format('Y-m-d');
+            $data['add_time'] = $request->course_add_time;
             $data['course_image'] = $path;
             $data['intro_video'] = $video_path;
             $data['keywords'] = $request->keywords;
@@ -87,6 +78,7 @@ class allCourses extends Controller
             $data['status'] = $request->status;
             $data['features'] = $featured;
             $data['popular'] = $popular;
+            return $data;
             $save = Course::create($data);
             if ($save) {
                 Session()->flash('message', 'Course created successfully!');
@@ -95,11 +87,12 @@ class allCourses extends Controller
                 return redirect()->route('allCourses');
             }
         } else {
-            Session()->flash('error', 'Image is not uploaded');
+            Session()->flash('message', 'Image is not uploaded');
             session()->flash('flash_type', 'alert-warning');
             session()->flash('icon', 'ni-alert-fill-c');
             return redirect()->back();
         }
+
     }
 
     public function editCourse($id){
@@ -110,29 +103,8 @@ class allCourses extends Controller
     }
 
     public function updateCourse(Request $request){
-        dd($request);
-        // $validator = Validator::make($request->all(), [
-        //     'class_id' => 'required|integer',
-        //     'subject_id' => 'required|integer',
-        //     'course_title' => 'required|string|max:50',
-        //     'course_desc' => 'required|string',
-        //     'course_add_time' => 'required|string',
-        //     'keywords' => 'required|string',
-        //     'price' => 'required|integer',
-        //     'd_price' => 'required|integer',
-        //     'status' => 'required|integer',
-        //     'course_cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-        // ]);
-
-        // if ($validator->fails()) {
-        //     Session()->flash('error', 'All fields are required!');
-        //     session()->flash('flash_type', 'alert-danger');
-        //     session()->flash('icon', 'ni-alert-fill-c');
-        //     return redirect()->back()->withInput();
-        // }
-        $path = null;
-        $featured = null;
-        $popular = null;
+        $featured = $request->featured_course == 'on' ? 1 : 0;
+        $popular =  $request->popular_course == 'on' ? 1 : 0;
 
         $course = Course::whereId($request->id)->first();
         $course->title = $request->course_title;
@@ -162,7 +134,6 @@ class allCourses extends Controller
             $path = $request->old_img;
         }
         $course->course_image = $path;
-        // return $request;
         $save = $course->save();
         if ($save) {
             session()->flash('message', 'Course Updated Successfully');

@@ -20,6 +20,13 @@
 
     <!-- nk-block -->
     <div class="nk-block nk-block-lg">
+        @if(Session::has('message'))
+        <div class="example-alert mb-3">
+            <div class="alert {{ Session::get('flash_type') }} alert-icon">
+                <em class="icon ni {{ Session::get('icon') }}"></em> {{ Session::get('message') }}
+            </div>
+        </div>
+        @endif
         <div class="nk-block-head">
             <div class="nk-block-head-content">
                 <h4 class="nk-block-title">All Courses List</h4><a href="{{route('add-Courses')}}"

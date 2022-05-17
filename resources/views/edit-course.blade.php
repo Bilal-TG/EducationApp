@@ -47,14 +47,14 @@
                                         <option name="class_id" value="{{$course->class_id}}">
                                             @foreach ($allClasses as $class)
                                             @if($course->class_id == $class->id)
-                                                <option selected name="class_id" value="{{$class->id}}">{{$class->class_name}}
-                                                (Selected)
-                                                </option>
-                                            @endif
-                                            <option name="class_id" value="{{$class->id}}">{{$class->class_name}}
+                                        <option selected name="class_id" value="{{$class->id}}">{{$class->class_name}}
+                                            (Selected)
+                                        </option>
+                                        @endif
+                                        <option name="class_id" value="{{$class->id}}">{{$class->class_name}}
                                             @endforeach
                                         </option>
-                                        
+
                                     </select>
                                 </div>
                             </div>
@@ -113,7 +113,8 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="card card-bordered">
-                                {{-- <textarea name="course_desc" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$course->description}}</textarea> --}}
+                                {{-- <textarea name="course_desc" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$course->description}}</textarea>
+                                --}}
                                 <div class="quill-minimal">
                                     <input type="text" value="{{$course->description}}" name="course_desc">
                                 </div>
@@ -132,7 +133,8 @@
                                 <div class="form-icon form-icon-right">
                                     <em class="icon ni ni-calendar-alt"></em>
                                 </div>
-                                <input type="text" name="course_add_time" value="{{$course->add_time}}" class="form-control date-picker" >
+                                <input type="text" name="course_add_time" value="{{$course->add_time}}"
+                                    class="form-control date-picker">
                             </div>
                         </div>
                     </div>
@@ -175,8 +177,8 @@
                                 <div class="form-control-wrap">
                                     <div class="icon-after-image">
                                         <video width="100" height="100" controls>
-                                            <source src="{{$course->course_image}}" type="video/mp4">
-                                          </video>
+                                            <source src="{{$course->intro_video}}" type="video/*">
+                                        </video>
                                         <div class="close">
                                             <em class="icon ni ni-cross-circle-fill"></em>
                                         </div>
@@ -311,8 +313,10 @@
                     <div class="row g-3">
                         <div class="col-lg-7 offset-lg-5">
                             <div class="form-group mt-2">
-                                <button type="submit" href="{{route('update-course')}}" class="btn btn-lg btn-primary m-2">Update</button>
-                                <a class="btn btn-lg btn-danger m-2" href="{{ route('delete-course', $course->id) }}">Delete</a>
+                                <button type="submit" href="{{route('update-course')}}"
+                                    class="btn btn-lg btn-primary m-2">Update</button>
+                                <a class="btn btn-lg btn-danger m-2"
+                                    href="{{ route('delete-course', $course->id) }}">Delete</a>
                             </div>
                         </div>
                     </div>

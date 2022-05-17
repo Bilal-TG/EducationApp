@@ -13,3 +13,7 @@ function closePopup(){
     popUp.style.display = 'none';
 }
 
+function showProgressBar(){
+    let progressBar = document.querySelector('.center-sticky');
+    progressBar.classList.remove('d-none');
+}
