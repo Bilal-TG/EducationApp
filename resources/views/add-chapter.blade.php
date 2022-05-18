@@ -160,5 +160,7 @@
 <script src="{{asset('js/libs/editors/quill.js')}}"></script>
 <link rel="stylesheet" href="{{asset('css/editors/quill.css')}}">
 <script src="{{asset('js/editors.js')}}">
+< script >
+</script>
 </script>
 @endsection
