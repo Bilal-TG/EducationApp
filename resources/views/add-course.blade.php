@@ -30,7 +30,8 @@
                 <div class="card-head">
                     <h5 class="card-title">Add New Course</h5>
                 </div>
-                <form action="{{route('save-course')}}" class="gy-3" method="post" enctype="multipart/form-data">
+                <form id="uplaodForm" action="{{route('save-course')}}" class="gy-3" method="post"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="row g-3 align-center">
                         <div class="col-lg-5">
@@ -44,8 +45,10 @@
                                 <label class="form-label">Select Class</label>
                                 <div class="form-control-wrap">
                                     <select class="form-select" name="class_id" data-placeholder="Select Class">
-                                        @foreach ($allClasses as $class)
-                                        <option name="class_id" value="{{$class->id}}">{{$class->class_name}}</option>
+                                        @foreach($allClasses as $class)
+                                        <option name="class_id" value="{{$class->id}}">
+                                            {{$class->class_name}}
+                                        </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -65,7 +68,8 @@
                                 <div class="form-control-wrap">
                                     <select class="form-select" name="subject_id" data-placeholder="Select Class">
                                         @foreach ($allSubject as $subject)
-                                        <option name="subject_id" value="{{$subject->id}}">{{$subject->title}}
+                                        <option name="subject_id" value="{{$subject->id}}">
+                                            {{$subject->title}}
                                         </option>
                                         @endforeach
                                     </select>
@@ -83,7 +87,7 @@
                         <div class="col-lg-7">
                             <div class="form-group">
                                 <div class="form-control-wrap">
-                                    <input type="text" name="course_title" class="form-control" id="site-name"
+                                    <input type="text" name="course_title" class=" form-control" id="site-name"
                                         placeholder="Course Title">
                                 </div>
                             </div>
@@ -152,7 +156,7 @@
                                 <label class="form-label">Upload Course Intro Video</label>
                                 <div class="form-control-wrap">
                                     <div class="custom-file">
-                                        <input type="file" name="intro_video" class="custom-file-input" id="customFile">
+                                        <input type="file" name="video" class="custom-file-input" id="customFile">
                                         <label class="custom-file-label" for="customFile">Choose file</label>
                                     </div>
                                 </div>
@@ -241,7 +245,7 @@
                                 <li>
                                     <div class="custom-control custom-radio">
                                         <input type="radio" value="2" class="custom-control-input" name="status"
-                                            id="reg-request">
+                                            id="reg-request" id="status">
                                         <label class="custom-control-label" for="reg-request">Draft</label>
                                     </div>
                                 </li>
@@ -281,8 +285,7 @@
                     <div class="row g-3">
                         <div class="col-lg-7 offset-lg-5">
                             <div class="form-group mt-2">
-                                <button type="submit" onclick="showProgressBar()"
-                                    class="btn btn-lg btn-primary">Update</button>
+                                <button type="submit" class="btn btn-lg btn-primary">Save</button>
                             </div>
                         </div>
                     </div>
@@ -296,7 +299,7 @@
 @section('link-js')
 <script src="{{asset('js/libs/editors/quill.js')}}"></script>
 <link rel="stylesheet" href="{{asset('css/editors/quill.css')}}">
-<script src="{{asset('js/editors.js')}}">
-< script src = "{{asset('js/app.js')}}" >
-</script>
+<script src="{{asset('js/editors.js')}}"></script>
+<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/saveUpdate.js')}}"></script>
 @endsection

@@ -33,6 +33,7 @@ class allCourses extends Controller
             'keywords' => 'required|string',
             'price' => 'required|integer',
             'd_price' => 'required|integer',
+            'video_path' => 'string|required',
             'course_cover' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -45,8 +46,7 @@ class allCourses extends Controller
         $featured = $request->featured_course == 'on' ? 1 : 0;
         $popular =  $request->popular_course == 'on' ? 1 : 0 ;
         $file = $request->file('course_cover');
-        $video_file = $request->file('intro_video');
-        if ($file && $video_file) {
+        if ($file) {
             if($file){
                 $ext = $file->extension();
                 $filename = $request->course_title . '.' . $ext;
@@ -56,29 +56,19 @@ class allCourses extends Controller
                     $path = asset(Storage::url($path));
                 }
             }
-            if($video_file){
-                $video_ext = $video_file->extension();
-                $video_filename = $request->course_title . '.' . $video_ext;
-
-                $video_path = $video_file->storeAs('public/course_intros', str_replace(' ', '_', $video_filename));
-                if ($video_path) {
-                    $video_path = asset(Storage::url($video_path));
-                }
-            }
             $data['title'] = $request->course_title;
             $data['description'] = $request->course_desc;
             $data['subject_id'] = $request->subject_id;
             $data['class_id'] = $request->class_id;
             $data['add_time'] = $request->course_add_time;
             $data['course_image'] = $path;
-            $data['intro_video'] = $video_path;
+            $data['intro_video'] = $request->video_path;
             $data['keywords'] = $request->keywords;
             $data['price'] = $request->price;
             $data['sale_price'] = $request->d_price;
             $data['status'] = $request->status;
             $data['features'] = $featured;
             $data['popular'] = $popular;
-            return $data;
             $save = Course::create($data);
             if ($save) {
                 Session()->flash('message', 'Course created successfully!');
@@ -118,8 +108,6 @@ class allCourses extends Controller
         $course->price = $request->price;
         $course->sale_price = $request->d_price;
         $course->status = $request->status;
-        $course->featured = 1;
-        $course->popular = 1;
         $file = $request->file('course_cover');
         if ($file != null) {
             $ext = $file->extension();

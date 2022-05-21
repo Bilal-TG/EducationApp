@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\allCourses;
 use App\Http\Controllers\Admin\allClasses;
-use App\Http\Controllers\Admin\SubjectController;
-use App\Http\Controllers\Admin\ChapterController;
-use App\Http\Controllers\Admin\LessonController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\allCourses;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\SaveController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\LessonController;
+use App\Http\Controllers\Admin\ChapterController;
+use App\Http\Controllers\Admin\SubjectController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,4 +70,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('edit-subject/{id}', [SubjectController::class, 'editSubject'])->name('edit-subject');
     //Chapters
     Route::get('chapters', [ChapterController::class, 'index'])->name('all-chapters');
+    Route::post('save-video', [SaveController::class, 'saveVideo'] )->name('saveVideo');
 });
