@@ -152,13 +152,25 @@
                             </div>
                         </div>
                         <div class="col-lg-7">
-                            <div class="form-group">
-                                <label class="form-label">Upload Course Intro Video</label>
-                                <div class="form-control-wrap">
-                                    <div class="custom-file">
-                                        <input type="file" name="video" class="custom-file-input" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                            <div class="card">
+                                <div class="card-header text-center">
+                                    <h5> Upload Course Intro Video </h5>
+                                </div>
+
+                                <div class="card-body">
+                                    <div id="upload-container" class="text-center">
+                                        <a id="browseFile" class="btn btn-primary">Brows File</a>
                                     </div>
+                                    <div style="display: none" class="progress mt-3" style="height: 25px">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                            role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                            style="width: 75%; height: 100%">
+                                            75%</div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer p-4" style="display: none">
+                                    <video id="videoPreview" src="" controls style="width: 100%; height: auto"></video>
                                 </div>
                             </div>
                         </div>
@@ -294,6 +306,14 @@
         </div><!-- card -->
     </div> <!-- nk-block -->
 </div>
+
+<div class="container pt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('link-js')
@@ -301,5 +321,6 @@
 <link rel="stylesheet" href="{{asset('css/editors/quill.css')}}">
 <script src="{{asset('js/editors.js')}}"></script>
 <script src="{{asset('js/app.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/resumablejs@1.1.0/resumable.min.js"></script>
 <script src="{{asset('js/saveUpdate.js')}}"></script>
 @endsection

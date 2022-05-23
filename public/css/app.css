@@ -62,3 +62,11 @@
 	top: 0;
 	right: 0;
 }
+
+a#browseFile {
+	color: #fff;
+}
+
+.card-header.text-center h5{
+	font-size:15px;
+}
