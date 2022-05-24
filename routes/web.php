@@ -70,5 +70,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('edit-subject/{id}', [SubjectController::class, 'editSubject'])->name('edit-subject');
     //Chapters
     Route::get('chapters', [ChapterController::class, 'index'])->name('all-chapters');
+    Route::get('add-chapter', [ChapterController::class, 'add'])->name('add-chapter');
     Route::post('save-video', [SaveController::class, 'saveVideo'] )->name('saveVideo');
 });

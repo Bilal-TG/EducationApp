@@ -21,26 +21,6 @@
                     <div class="row g-3 align-center">
                         <div class="col-lg-5">
                             <div class="form-group">
-                                <label class="form-label" for="site-name">Select Class</label>
-                                <span class="form-note">Select the class to which you want to add the Subject.</span>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="form-group">
-                                <label class="form-label">Select Class</label>
-                                <div class="form-control-wrap">
-                                    <select class="form-select" multiple="multiple" data-placeholder="Select Class">
-                                        @foreach ($allClasses as $class)
-                                        <option value="{{$class->id}}">{{$class->class_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row g-3 align-center">
-                        <div class="col-lg-5">
-                            <div class="form-group">
                                 <label class="form-label" for="site-name">Select Course</label>
                                 <span class="form-note">Select the Course to which you want to add the Chapter.</span>
                             </div>
@@ -51,8 +31,11 @@
                                 <div class="form-control-wrap">
                                     <select class="form-select" multiple="multiple" data-placeholder="Select Course">
                                         @foreach ($allCourses as $course)
-                                        <option value="{{$course->id}}">{{$course->title}}</option>
-                                        @endforeach
+
+                                        <option name="course_id" value="{{$course->id}}">{{$course->title}}
+                                            @endforeach
+                                        </option>
+
                                     </select>
                                 </div>
                             </div>

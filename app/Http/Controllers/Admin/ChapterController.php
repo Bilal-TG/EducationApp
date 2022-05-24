@@ -18,7 +18,7 @@ class ChapterController extends Controller
 
     public function add()
     {
-        $allClasses = Classes::all();
-        return view('add-chapter', compact('allClasses'));
+        $allCourses = Course::all();
+        return view('add-chapter', compact('allCourses'));
     }
 }
