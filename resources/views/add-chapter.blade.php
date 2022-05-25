@@ -17,7 +17,8 @@
                 <div class="card-head">
                     <h5 class="card-title">Add New Chapter</h5>
                 </div>
-                <form action="#" class="gy-3">
+                <form action="{{route('save-chapter')}}" method="post" class="gy-3">
+                    @csrf
                     <div class="row g-3 align-center">
                         <div class="col-lg-5">
                             <div class="form-group">
@@ -29,13 +30,16 @@
                             <div class="form-group">
                                 <label class="form-label">Select Course</label>
                                 <div class="form-control-wrap">
-                                    <select class="form-select" multiple="multiple" data-placeholder="Select Course">
+                                    <select class="form-select" name="course_id" data-placeholder="Select Course">
                                         @foreach ($allCourses as $course)
-
-                                        <option name="course_id" value="{{$course->id}}">{{$course->title}}
-                                            @endforeach
+                                        @if($course->id == basename(Request::url()))
+                                        <option selected name="course_id" value="{{$course->id}}">
+                                            {{$course->title}} (Selected)
                                         </option>
-
+                                        @endif
+                                        <option name="course_id" value="{{$course->id}}">{{$course->title}}
+                                        </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -51,7 +55,7 @@
                         <div class="col-lg-7">
                             <div class="form-group">
                                 <div class="form-control-wrap">
-                                    <input type="text" name="subject_title" class="form-control" id="site-name"
+                                    <input type="text" name="chapter_name" class="form-control" id="site-name"
                                         placeholder="Chapter Name">
                                 </div>
                             </div>
@@ -67,8 +71,8 @@
                         <div class="col-lg-7">
                             <div class="card card-bordered">
                                 <!-- Create the editor container -->
-                                <div class="quill-minimal">
-                                </div>
+                                <textarea id="editor" name="chapter_desc" class="quill-minimal">
+                                </textarea>
                             </div>
                         </div>
                     </div>

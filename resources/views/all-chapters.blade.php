@@ -18,13 +18,22 @@ a:hover:after {
 }
 </style>
 @endsection
-@section('content') <div class="nk-content">
+@section('content')
+<div class="nk-content">
     <!-- nk-block -->
     <div class="nk-block nk-block-lg">
+        @if(Session::has('message'))
+        <div class="example-alert mb-3">
+            <div class="alert {{ Session::get('flash_type') }} alert-icon">
+                <em class="icon ni {{ Session::get('icon') }}"></em> {{ Session::get('message') }}
+            </div>
+        </div>
+        @endif
         <div class="nk-block-head">
             <div class="nk-block-head-content">
-                <h4 class="nk-block-title">All Chapters List</h4><a href="#" class="btn btn-success add-class-btn">Add
-                    New Chapter</a>
+                <h4 class="nk-block-title">All Chapters List</h4>
+                <a href="{{route('add-chapter')}}" class="btn btn-success add-class-btn">Add New
+                    Chapter</a>
             </div>
         </div>
         <div class="nk-block nk-block-lg">
@@ -50,13 +59,16 @@ a:hover:after {
                                                     </h5>
                                                     <p class="card-text"> {{$chapter->chapter_description}}
 
-                                                    </p><a href="#" class="btn btn-primary">View / Edit</a>
+                                                    </p><a href="{{route('edit-chapter', $chapter->id)}}"
+                                                        class="btn btn-primary">View
+                                                        /
+                                                        Edit</a>
                                                 </div>
                                             </div>
                                         </div>
                                         @endforeach
                                         <div class="col-lg-4 mt-2 d-flex align-center">
-                                            <a href="" class="btn btn-primary"
+                                            <a href="{{route('add-chapter', $course->id)}}" class="btn btn-primary"
                                                 title="Add New Chapter to this Course!"><em
                                                     class="icon ni ni-plus-circle-fill"></em>
                                             </a>

@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta name="author" content="Azzurri.pk">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description"
-        content="">
+    <meta name="description" content="">
     <!-- Fav Icon  -->
     <link rel="shortcut icon" href="{{asset('jsTree/logo.webp')}}">
     <!-- Page Title  -->
@@ -15,7 +14,7 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/dashlite.css')}}">
     <link id="skin-default" rel="stylesheet" href="{{asset('css/theme.css')}}">
-    
+
     @yield('style')
 </head>
 
@@ -114,8 +113,9 @@
                                                     List</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="#" class="nk-menu-link"><span class="nk-menu-text">Add New
-                                                    Chapter</span></a>
+                                            <a href="{{route('add-chapter')}}" class="nk-menu-link">
+                                                <span class="nk-menu-text">Add New Chapter</span>
+                                            </a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li><!-- .nk-menu-item -->
@@ -130,8 +130,9 @@
                                                     List</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ route('addLesson') }}" class="nk-menu-link"><span class="nk-menu-text">Add Chapter Lessons
-                                                    </span></a>
+                                            <a href="{{ route('addLesson') }}" class="nk-menu-link"><span
+                                                    class="nk-menu-text">Add Chapter Lessons
+                                                </span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
                                 </li><!-- .nk-menu-item -->
@@ -154,11 +155,13 @@
                                     </a>
                                     <ul class="nk-menu-sub">
                                         <li class="nk-menu-item">
-                                            <a href="{{ route('allFaq') }}" class="nk-menu-link"><span class="nk-menu-text">All
+                                            <a href="{{ route('allFaq') }}" class="nk-menu-link"><span
+                                                    class="nk-menu-text">All
                                                     FAQs</span></a>
                                         </li>
                                         <li class="nk-menu-item">
-                                            <a href="{{ route('add-faq') }}" class="nk-menu-link"><span class="nk-menu-text">Add
+                                            <a href="{{ route('add-faq') }}" class="nk-menu-link"><span
+                                                    class="nk-menu-text">Add
                                                     FAQs</span></a>
                                         </li>
                                     </ul><!-- .nk-menu-sub -->
